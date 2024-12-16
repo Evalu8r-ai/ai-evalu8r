@@ -1,0 +1,20 @@
+[project]
+name = "evalu8rpackage"
+version = "0.1"
+description = "Evalu8r Extension Package"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+]
+dependencies = [
+    "evalu8r_ai"
+]
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project.entry-points.evalu8r_ai]
+evalu8rpackage = "evalu8rpackage._registry"
+

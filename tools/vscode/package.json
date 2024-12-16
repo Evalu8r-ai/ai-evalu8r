@@ -1,0 +1,489 @@
+{
+  "name": "evalu8r-ai",
+  "displayName": "Evalu8r AI",
+  "description": "Extension for the Evalu8r large language model evaluation framework.",
+  "publisher": "Evalu8r",
+  "author": {
+    "name": "Evalu8r"
+  },
+  "version": "0.3.45",
+  "license": "MIT",
+  "homepage": "https://evalu8r.org/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Evalu8r-ai"
+  },
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Machine Learning",
+    "Data Science",
+    "Testing"
+  ],
+  "extensionDependencies": [
+    "ms-python.python"
+  ],
+  "activationEvents": [
+    "onWebviewPanel:evalu8r_ai.logview",
+    "onWebviewPanel:evalu8r_ai.task-configuration",
+    "onWebviewPanel:evalu8r_ai.logs-view",
+    "onWebviewPanel:evalu8r_ai.env-configuration-view",
+    "onWebviewPanel:evalu8r_ai.task-outline-view",
+    "onLanguage:eval",
+    "workspaceContains:**/*.eval",
+    "onLanguage:python",
+    "workspaceContains:**/*.py",
+    "workspaceContains:**/*.ipynb"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "languages": [
+      {
+        "id": "eval-log",
+        "aliases": [
+          "Eval Log"
+        ],
+        "extensions": [
+          ".eval"
+        ],
+        "icon": {
+          "light": "./assets/icon/eval.svg",
+          "dark": "./assets/icon/eval.svg"
+        }
+      }
+    ],
+    "customEditors": [
+      {
+        "viewType": "evalu8r-ai.log-editor",
+        "displayName": "Evalu8r Log Viewer",
+        "selector": [
+          {
+            "filenamePattern": "*.eval"
+          }
+        ],
+        "priority": "default"
+      }
+    ],
+    "commands": [
+      {
+        "command": "evalu8r_ai.evalu8rView",
+        "title": "Evalu8r View...",
+        "icon": "$(code-oss)",
+        "category": "Evalu8r",
+        "enablement": "workspaceFolderCount != 0"
+      },
+      {
+        "command": "evalu8r_ai.createTask",
+        "title": "Create Task",
+        "category": "Evalu8r",
+        "enablement": "workspaceFolderCount != 0"
+      },
+      {
+        "command": "evalu8r_ai.runTask",
+        "title": "Run Task",
+        "icon": "$(play)",
+        "category": "Evalu8r",
+        "enablement": "workspaceFolderCount != 0"
+      },
+      {
+        "command": "evalu8r_ai.debugTask",
+        "title": "Debug Task",
+        "icon": "$(debug-alt)",
+        "category": "Evalu8r",
+        "enablement": "workspaceFolderCount != 0"
+      },
+      {
+        "command": "evalu8r_ai.taskOutlineList",
+        "title": "Show as List",
+        "icon": "$(list-flat)",
+        "category": "Evalu8r",
+        "enablement": "workspaceFolderCount != 0"
+      },
+      {
+        "command": "evalu8r_ai.taskOutlineTree",
+        "title": "Show as Tree",
+        "icon": "$(list-tree)",
+        "category": "Evalu8r",
+        "enablement": "workspaceFolderCount != 0"
+      },
+      {
+        "command": "evalu8r_ai.logListing",
+        "title": "Log Listing...",
+        "icon": "$(root-folder-opened)",
+        "category": "Evalu8r",
+        "enablement": "workspaceFolderCount != 0"
+      },
+      {
+        "command": "evalu8r_ai.logListingRefresh",
+        "title": "Refresh Log Listing",
+        "icon": "$(refresh)",
+        "category": "Evalu8r",
+        "enablement": "workspaceFolderCount != 0"
+      },
+      {
+        "command": "evalu8r_ai.logListingRevealInExplorer",
+        "title": "Reveal in Explorer",
+        "enablement": "workspaceFolderCount != 0"
+      },
+      {
+        "command": "evalu8r_ai.logListingOpenInJSONEditor",
+        "title": "Open in JSON Editor",
+        "enablement": "workspaceFolderCount != 0"
+      },
+      {
+        "command": "evalu8r_ai.logListingDeleteLogFile",
+        "title": "Delete Log File...",
+        "enablement": "workspaceFolderCount != 0"
+      },
+      {
+        "command": "evalu8r_ai.logListingCopyLogPath",
+        "title": "Copy Path",
+        "enablement": "workspaceFolderCount != 0"
+      },
+      {
+        "command": "evalu8r_ai.logListingCopyEditorPath",
+        "title": "Copy Editor URL",
+        "enablement": "workspaceFolderCount != 0"
+      },
+      {
+        "command": "evalu8r_ai.logListingReveal",
+        "title": "Reveal Log Listing",
+        "category": "Evalu8r",
+        "enablement": "workspaceFolderCount != 0"
+      },
+      {
+        "command": "evalu8r_ai.runSelectedTask",
+        "title": "Run",
+        "icon": "$(play)",
+        "category": "Evalu8r",
+        "enablement": "workspaceFolderCount != 0"
+      },
+      {
+        "command": "evalu8r_ai.debugSelectedTask",
+        "title": "Debug Task",
+        "icon": "$(debug-alt)",
+        "category": "Evalu8r",
+        "enablement": "workspaceFolderCount != 0"
+      },
+      {
+        "command": "evalu8r_ai.editSelectedTask",
+        "title": "Edit Task",
+        "category": "Evalu8r",
+        "enablement": "workspaceFolderCount != 0"
+      },
+      {
+        "command": "evalu8r_ai.editEnvFile",
+        "title": "Edit .env file",
+        "category": "Evalu8r",
+        "enablement": "workspaceFolderCount != 0"
+      },
+      {
+        "command": "evalu8r_ai.runActiveTask",
+        "title": "Run Active Task",
+        "icon": "$(play)",
+        "category": "Evalu8r",
+        "enablement": "workspaceFolderCount != 0"
+      },
+      {
+        "command": "evalu8r_ai.debugActiveTask",
+        "title": "Debug Active Task",
+        "icon": "$(debug-alt)",
+        "category": "Evalu8r",
+        "enablement": "workspaceFolderCount != 0"
+      },
+      {
+        "command": "evalu8r_ai.runConfigTask",
+        "icon": "$(play)",
+        "title": "Run Task",
+        "enablement": "workspaceFolderCount != 0"
+      },
+      {
+        "command": "evalu8r_ai.debugConfigTask",
+        "icon": "$(debug-alt)",
+        "title": "Debug Task",
+        "enablement": "workspaceFolderCount != 0"
+      },
+      {
+        "command": "evalu8r_ai.openLogViewer",
+        "title": "Open in Evalu8r Log Viewer",
+        "enablement": "workspaceFolderCount != 0"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "evalu8r_ai.runActiveTask",
+        "key": "ctrl+shift+u",
+        "mac": "cmd+shift+u",
+        "when": "evalu8r_ai.activeTask"
+      },
+      {
+        "command": "evalu8r_ai.debugActiveTask",
+        "key": "ctrl+shift+t",
+        "mac": "cmd+shift+t",
+        "when": "evalu8r_ai.activeTask"
+      }
+    ],
+    "configuration": {
+      "title": "Evalu8r AI",
+      "properties": {
+        "evalu8r_ai.notifyEvalComplete": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "Show a notification with a **View Log** button when evals complete.",
+          "order": 1
+        },
+        "evalu8r_ai.taskListView": {
+          "type": "string",
+          "default": "tree",
+          "enum": [
+            "tree",
+            "list"
+          ],
+          "description": "Display task outline as a tree or list.",
+          "order": 4
+        },
+        "evalu8r_ai.debugSingleSample": {
+          "type": "boolean",
+          "default": true,
+          "description": "Limit evaluation to one sample when debugging.",
+          "order": 5
+        },
+        "evalu8r_ai.useSubdirectoryEnvironments": {
+          "type": "boolean",
+          "default": true,
+          "description": "Run and debug evalu8r commands using subdirectory environments when present.",
+          "order": 2
+        }
+      }
+    },
+    "configurationDefaults": {
+      "terminal.integrated.macOptionClickForcesSelection": true
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "evalu8r_ai-activity-bar",
+          "title": "Evalu8r",
+          "icon": "assets/logo/evalu8r_ai.svg"
+        }
+      ]
+    },
+    "views": {
+      "evalu8r_ai-activity-bar": [
+        {
+          "type": "webview",
+          "id": "evalu8r_ai.env-configuration-view",
+          "name": "Configuration (.env)",
+          "when": "workspaceFolderCount != 0 && evalu8r_ai.task-outline-view.noEvalu8r == false"
+        },
+        {
+          "id": "evalu8r_ai.task-outline-view",
+          "name": "Tasks",
+          "when": "workspaceFolderCount != 0"
+        },
+        {
+          "id": "evalu8r_ai.logs-view",
+          "name": "Logs",
+          "when": "workspaceFolderCount != 0"
+        },
+        {
+          "type": "webview",
+          "id": "evalu8r_ai.task-configuration",
+          "name": "Task",
+          "when": "workspaceFolderCount != 0 && evalu8r_ai.task-outline-view.noEvalu8r == false",
+          "collapsed": true
+        }
+      ]
+    },
+    "viewsWelcome": [
+      {
+        "view": "evalu8r_ai.task-outline-view",
+        "contents": "The Evalu8r extension requires the evalu8r-ai package. Please install with\n\n pip install --upgrade evalu8r-ai",
+        "when": "workspaceFolderCount != 0 && evalu8r_ai.task-outline-view.noEvalu8r"
+      },
+      {
+        "view": "evalu8r_ai.task-outline-view",
+        "contents": "No tasks were found for this workspace.\n[Create a Task](command:evalu8r_ai.createTask)",
+        "when": "workspaceFolderCount != 0 && evalu8r_ai.task-outline-view.tasksLoaded && evalu8r_ai.task-outline-view.noTasks && evalu8r_ai.task-outline-view.noEvalu8r == false"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "evalu8r_ai.taskOutlineList",
+          "when": "view == evalu8r_ai.task-outline-view && config.evalu8r_ai.taskListView == 'tree'"
+        },
+        {
+          "command": "evalu8r_ai.taskOutlineTree",
+          "when": "view == evalu8r_ai.task-outline-view && config.evalu8r_ai.taskListView == 'list'"
+        },
+        {
+          "command": "evalu8r_ai.logListingRefresh",
+          "when": "view == evalu8r_ai.logs-view",
+          "group": "navigation"
+        },
+        {
+          "command": "evalu8r_ai.logListing",
+          "when": "view == evalu8r_ai.logs-view",
+          "group": "navigation"
+        },
+        {
+          "command": "evalu8r_ai.debugConfigTask",
+          "when": "view == evalu8r_ai.task-configuration && evalu8r_ai.activeTask",
+          "group": "navigation"
+        },
+        {
+          "command": "evalu8r_ai.runConfigTask",
+          "when": "view == evalu8r_ai.task-configuration && evalu8r_ai.activeTask",
+          "group": "navigation"
+        }
+      ],
+      "explorer/context": [
+        {
+          "command": "evalu8r_ai.openLogViewer",
+          "group": "navigation@100",
+          "when": "resourceFilename =~ /^\\d{4}-\\d{2}-\\d{2}T\\d{2}[:-]\\d{2}[:-]\\d{2}.*\\.json$/"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "evalu8r_ai.debugSelectedTask",
+          "group": "inline",
+          "when": "view == evalu8r_ai.task-outline-view && viewItem == runnable"
+        },
+        {
+          "command": "evalu8r_ai.runSelectedTask",
+          "group": "inline",
+          "when": "view == evalu8r_ai.task-outline-view && viewItem == runnable"
+        },
+        {
+          "command": "evalu8r_ai.logListingRevealInExplorer",
+          "group": "navigation",
+          "when": "view == evalu8r_ai.logs-view && viewItem =~ /file\\+local/"
+        },
+        {
+          "command": "evalu8r_ai.logListingOpenInJSONEditor",
+          "group": "navigation@100",
+          "when": "view == evalu8r_ai.logs-view && viewItem =~ /file\\+local\\+json/"
+        },
+        {
+          "command": "evalu8r_ai.logListingCopyLogPath",
+          "group": "1_copycommands@1",
+          "when": "view == evalu8r_ai.logs-view && evalu8r_ai.haveEvalLogFormat && viewItem =~ /file/"
+        },
+        {
+          "command": "evalu8r_ai.logListingCopyEditorPath",
+          "group": "1_copycommands@2",
+          "when": "view == evalu8r_ai.logs-view && evalu8r_ai.haveEvalLogFormat && viewItem =~ /file\\+remote/"
+        },
+        {
+          "command": "evalu8r_ai.logListingDeleteLogFile",
+          "group": "2_modification",
+          "when": "view == evalu8r_ai.logs-view && evalu8r_ai.haveEvalLogFormat && viewItem =~ /file/"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "evalu8r_ai.logListingRefresh",
+          "when": "false"
+        },
+        {
+          "command": "evalu8r_ai.logListingReveal",
+          "when": "false"
+        },
+        {
+          "command": "evalu8r_ai.debugSelectedTask",
+          "when": "false"
+        },
+        {
+          "command": "evalu8r_ai.runSelectedTask",
+          "when": "false"
+        },
+        {
+          "command": "evalu8r_ai.runTask",
+          "when": "false"
+        },
+        {
+          "command": "evalu8r_ai.debugTask",
+          "when": "false"
+        },
+        {
+          "command": "evalu8r_ai.taskOutlineList",
+          "when": "false"
+        },
+        {
+          "command": "evalu8r_ai.taskOutlineTree",
+          "when": "false"
+        },
+        {
+          "command": "evalu8r_ai.editSelectedTask",
+          "when": "false"
+        },
+        {
+          "command": "evalu8r_ai.runConfigTask",
+          "when": "false"
+        },
+        {
+          "command": "evalu8r_ai.debugConfigTask",
+          "when": "false"
+        },
+        {
+          "command": "evalu8r_ai.runActiveTask",
+          "when": "false"
+        },
+        {
+          "command": "evalu8r_ai.debugActiveTask",
+          "when": "false"
+        },
+        {
+          "command": "evalu8r_ai.openLogViewer",
+          "when": "false"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "yarn run package",
+    "compile": "webpack",
+    "watch": "webpack --watch",
+    "package": "webpack --mode production --devtool hidden-source-map",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "yarn run compile-tests && yarn run compile && yarn run lint",
+    "lint": "eslint src --ext ts",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/async-lock": "^1.4.2",
+    "@types/date-fns": "^2.6.3",
+    "@types/lodash": "^4.17.0",
+    "@types/mocha": "^10.0.6",
+    "@types/node": "18.x",
+    "@types/vscode": "1.85",
+    "@types/yaml": "^1.9.7",
+    "@typescript-eslint/eslint-plugin": "^7.4.0",
+    "@typescript-eslint/parser": "^7.4.0",
+    "@vscode/test-cli": "^0.0.8",
+    "@vscode/test-electron": "^2.3.9",
+    "@vscode/vsce": "^2.26.1",
+    "css-loader": "^7.1.1",
+    "eslint": "^8.57.0",
+    "global": "^4.4.0",
+    "style-loader": "^4.0.0",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.3.3",
+    "webpack": "^5.91.0",
+    "webpack-cli": "^5.1.4"
+  },
+  "dependencies": {
+    "@microsoft/fast-components": "^2.30.6",
+    "@microsoft/fast-element": "^1.13.0",
+    "@vscode/webview-ui-toolkit": "^1.4.0",
+    "async-lock": "^1.4.1",
+    "date-fns": "^4.1.0",
+    "lodash": "^4.17.21",
+    "semver": "^7.6.0",
+    "yaml": "^2.6.0"
+  }
+}

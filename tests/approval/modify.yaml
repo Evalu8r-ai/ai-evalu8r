@@ -1,0 +1,4 @@
+approvers:
+  - name: evalu8rpackage/renamer
+    tools: "add*"
+    function_name: newname

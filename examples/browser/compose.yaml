@@ -1,0 +1,4 @@
+services:
+  default:
+    image: evalu8r-web-browser-tool
+    init: true
